@@ -14,7 +14,7 @@ interface RunDao {
     @Query("SELECT * FROM running_table ORDER BY timeStamp DESC")
     fun getAllRunsSortedByDate(): LiveData<List<Run>>
 
-    @Query("SELECT * FROM running_table ORDER BY timeInMilis DESC")
+    @Query("SELECT * FROM  running_table ORDER BY timeInMilis DESC")
     fun getAllRunsSortedByTimeInMilis(): LiveData<List<Run>>
 
     @Query("SELECT * FROM running_table ORDER BY caloriesBurned DESC")

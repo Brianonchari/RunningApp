@@ -16,6 +16,7 @@ import co.studycode.runningapp.ui.viewmodels.MainViewModel
 import co.studycode.runningapp.utils.Constants.ACTION_PAUSE_SERVICE
 import co.studycode.runningapp.utils.Constants.ACTION_START_OR_RESUME_SERVICE
 import co.studycode.runningapp.utils.Constants.ACTION_STOP_SERVICE
+import co.studycode.runningapp.utils.Constants.CANCEL_TRACKING_DIALOG
 import co.studycode.runningapp.utils.Constants.MAP_ZOOM
 import co.studycode.runningapp.utils.Constants.POLYLINE_COLOR
 import co.studycode.runningapp.utils.Constants.POLYLINE_WIDTH
@@ -99,18 +100,12 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     }
 
     private fun showCancelTrackingDialog() {
-        val dialog = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
-            .setTitle("Cancel Run")
-            .setMessage("Are you sure you want to cancel")
-            .setIcon(R.drawable.ic_delete)
-            .setPositiveButton("Yes") { _, _ ->
+        CancelTrackingDialog().apply {
+            setListener {
                 stopRun()
             }
-            .setNegativeButton("No") { dialogInterface, _ ->
-                dialogInterface.cancel()
-            }
-            .create()
-        dialog.show()
+        }.show(parentFragmentManager, CANCEL_TRACKING_DIALOG)
+
     }
 
     private fun stopRun() {
@@ -138,10 +133,10 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     private fun updateTracking(isTracking: Boolean) {
         this.isTracking = isTracking
-        if (!isTracking) {
+        if (!isTracking && curTimeInMillis > 0L) {
             btnToggleRun.text = "Start"
             btnFinishRun.visibility = View.VISIBLE
-        } else {
+        } else if(isTracking) {
             btnToggleRun.text = "Stop"
             btnFinishRun.visibility = View.GONE
             menu?.getItem(0)?.isVisible = true
@@ -179,7 +174,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     private fun endRunAndSave() {
         map?.snapshot { bmp ->
-            var distanceInMeters = 0
+            var  distanceInMeters = 0
             for (polyline in pathPoints) {
                 distanceInMeters += TrackingUtility.calculatePolyLineLength(polyline).toInt()
             }
