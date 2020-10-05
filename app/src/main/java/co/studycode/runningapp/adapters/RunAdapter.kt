@@ -15,8 +15,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
+    private var onItemClickListener: ((Run) -> Unit)? = null
     inner class RunViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
     val diffCallBack = object : DiffUtil.ItemCallback<Run>() {
         override fun areItemsTheSame(oldItem: Run, newItem: Run): Boolean {
             return oldItem.id == newItem.id
@@ -56,16 +56,24 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
             val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
             tvDate.text = dateFormat.format(calender.time)
 
-            val avgSpeed = "${run.avgSpeedInKMH}km/h"
-            tvAvgSpeed.text = avgSpeed
-
+//            val avgSpeed = "${run.avgSpeedInKMH}km/h"
+//            tvAvgSpeed.text = avgSpeed
+//
             val distanceInKm = "${run.distanceInMeters / 1000f}Km"
             tvDistance.text = distanceInKm
+//
+//            tvTime.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMilis)
+//
+//            val calloriesBurned = "${run.caloriesBurned}kcal"
+//            tvCalories.text = calloriesBurned
 
-            tvTime.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMilis)
-
-            val calloriesBurned = "${run.caloriesBurned}kcal"
-            tvCalories.text = calloriesBurned
+            setOnClickListener {
+                onItemClickListener?.let { it(run) }
+            }
         }
+    }
+
+    fun setOnItemClickListener(listener: (Run) -> Unit) {
+        onItemClickListener = listener
     }
 }

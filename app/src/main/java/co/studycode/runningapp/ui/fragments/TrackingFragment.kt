@@ -3,7 +3,6 @@ package co.studycode.runningapp.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -38,9 +37,9 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     private var pathPoints = mutableListOf<Polyline>()
     private var map: GoogleMap? = null
     private var curTimeInMillis = 0L
-    @set:Inject
-     var weight = 63f
 
+    @set:Inject
+    var weight = 63f
     private var menu: Menu? = null
 
     override fun onCreateView(
@@ -61,6 +60,11 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         btnFinishRun.setOnClickListener {
             zoomToSeeWholeTrack()
             endRunAndSave()
+        }
+        if(savedInstanceState!=null){
+            val cancelTrackingDialog = parentFragmentManager.findFragmentByTag(
+                CANCEL_TRACKING_DIALOG) as CancelTrackingDialog?
+            cancelTrackingDialog?.setListener { stopRun() }
         }
         mapView.getMapAsync {
             map = it
@@ -92,7 +96,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             R.id.miCancelTracking -> showCancelTrackingDialog()
         }
@@ -109,9 +112,11 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     }
 
     private fun stopRun() {
+        tvTimer.text = "00:00:00:00"
         sendCommandToService(ACTION_STOP_SERVICE)
         findNavController().navigate(R.id.action_trackingFragment_to_runFragment)
     }
+
 
     private fun subscribeToObservers() {
         TrackingService.isTracking.observe(viewLifecycleOwner, Observer {
@@ -136,7 +141,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         if (!isTracking && curTimeInMillis > 0L) {
             btnToggleRun.text = "Start"
             btnFinishRun.visibility = View.VISIBLE
-        } else if(isTracking) {
+        } else if (isTracking) {
             btnToggleRun.text = "Stop"
             btnFinishRun.visibility = View.GONE
             menu?.getItem(0)?.isVisible = true
@@ -174,7 +179,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     private fun endRunAndSave() {
         map?.snapshot { bmp ->
-            var  distanceInMeters = 0
+            var distanceInMeters = 0
             for (polyline in pathPoints) {
                 distanceInMeters += TrackingUtility.calculatePolyLineLength(polyline).toInt()
             }
@@ -205,7 +210,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
             map?.addPolyline(polylineOptions)
         }
-
     }
 
     private fun addLatestPolyline() {
@@ -217,9 +221,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
                 .width(POLYLINE_WIDTH)
                 .add(preLastLatLng)
                 .add(lastLatLng)
-
             map?.addPolyline(polyLineOptions)
-
         }
     }
 

@@ -39,4 +39,14 @@
         android:id="@+id/settingsFragment"
         android:name="co.studycode.runningapp.ui.fragments.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="co.studycode.runningapp.ui.fragments.DetailFragment"
+        android:label="DetailFragment" >
+        <argument
+            android:name="run"
+            app:argType="co.studycode.runningapp.db.Run"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
 </navigation>

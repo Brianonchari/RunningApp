@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <ImageView
+        android:id="@+id/detailImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/distanceCoverd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10Km"
+        android:textColor="@color/blueish"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/detailImg"
+        android:textSize="40sp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/distanceCoverdInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/distanceCoverd"
+        android:textColor="@color/orange"
+        android:text="Total Distance"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/timeTaken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detailImg"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        android:text="00:00:00"
+        android:textColor="@color/blueish"
+        android:textSize="40sp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/timeTakenInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Time"
+        android:textColor="@color/orange"
+        app:layout_constraintStart_toStartOf="@id/timeTaken"
+        app:layout_constraintTop_toBottomOf="@id/timeTaken"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/kcalBurned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/distanceCoverdInfo"
+        android:textColor="@color/blueish"
+        android:text="18kcal"
+        android:layout_marginTop="8dp"
+        android:textSize="40sp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/kcalBurnedInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/kcalBurned"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        android:textColor="@color/orange"
+        android:text="Calories Burned"
+        app:layout_constraintEnd_toEndOf="@id/kcalBurned"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/avgSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toBottomOf="@id/timeTakenInfo"
+        android:text="0Km/h"
+        android:textColor="@color/blueish"
+        android:textSize="40sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@id/timeTaken"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/avgSpeedInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/avgSpeed"
+        app:layout_constraintTop_toBottomOf="@id/avgSpeed"
+        android:textColor="@color/orange"
+        android:text="Average Speed"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

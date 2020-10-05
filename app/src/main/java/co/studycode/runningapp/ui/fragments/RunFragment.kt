@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_run.*
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
+
 @AndroidEntryPoint
 class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.PermissionCallbacks{
     private val viewModel: MainViewModel by viewModels()
@@ -30,6 +32,20 @@ class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.Permission
         super.onViewCreated(view, savedInstanceState)
         requestPermissions()
         setupRecyclerView()
+        val adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.filter_options, R.layout.spinner_item
+        )
+        adapter.setDropDownViewResource(R.layout.spinner_item)
+        spFilter.adapter = adapter
+
+        runAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+            putSerializable("run", it)
+
+            }
+            findNavController().navigate(R.id.detailFragment, bundle)
+        }
         when(viewModel.sortType){
             SortType.DATE -> spFilter.setSelection(0)
             SortType.RUNNING_TIME -> spFilter.setSelection(1)

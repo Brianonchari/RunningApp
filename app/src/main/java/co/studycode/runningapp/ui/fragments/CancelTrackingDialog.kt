@@ -10,9 +10,7 @@ class CancelTrackingDialog :DialogFragment(){
     private var _listener:(()-> Unit)? = null
 
     fun setListener(listener:()-> Unit){
-
         _listener = listener
-
     }
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return  AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
@@ -28,8 +26,5 @@ class CancelTrackingDialog :DialogFragment(){
                 dialogInterface.cancel()
             }
             .create()
-
-
     }
-
 }

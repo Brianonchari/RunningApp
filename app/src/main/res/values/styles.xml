@@ -2,9 +2,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Original AppCompat attributes. -->
-        <item name="colorPrimary">@color/md_blue_900</item>
+        <item name="colorPrimary">@color/green_chalk</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="colorSecondary">@color/md_blue_500</item>
-        <item name="android:colorBackground">@color/md_blue_700</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorBackground">@color/white</item>
         <item name="colorError">@color/errorColor</item>
 
         <!-- New MaterialComponents attributes. -->
@@ -33,6 +35,10 @@
         <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
 
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+    </style>
+
+    <style name="mySpinnerItemStyle" parent="Base.Widget.AppCompat.Spinner">
+        <item name="android:textColor">@color/orange</item>
     </style>
 
     <style name="TextViewStyle" parent="Widget.MaterialComponents.TextView">

@@ -98,5 +98,6 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                 barChart.invalidate()
             }
         })
+
     }
 }
