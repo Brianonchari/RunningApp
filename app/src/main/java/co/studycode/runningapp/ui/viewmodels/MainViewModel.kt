@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import co.studycode.runningapp.db.Profile
 import co.studycode.runningapp.db.Run
 import co.studycode.runningapp.repositories.MainRepository
 import co.studycode.runningapp.utils.SortType
@@ -65,6 +66,10 @@ class MainViewModel @ViewModelInject constructor(
 
     fun insertRun(run:Run) = viewModelScope.launch {
         mainRepository.insertRun(run)
+    }
+
+    fun saveProfile(profile: Profile) = viewModelScope.launch {
+        mainRepository.saveProfile(profile)
     }
 
 

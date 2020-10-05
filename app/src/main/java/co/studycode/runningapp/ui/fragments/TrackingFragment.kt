@@ -53,7 +53,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mapView.onCreate(savedInstanceState)
+        mapView?.onCreate(savedInstanceState)
         btnToggleRun.setOnClickListener {
             toggleRun()
         }
@@ -66,7 +66,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
                 CANCEL_TRACKING_DIALOG) as CancelTrackingDialog?
             cancelTrackingDialog?.setListener { stopRun() }
         }
-        mapView.getMapAsync {
+        mapView?.getMapAsync {
             map = it
             addAllPolylines()
         }
@@ -253,11 +253,11 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapView.onLowMemory()
+        mapView?.onLowMemory()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
+        mapView?.onSaveInstanceState(outState)
     }
 }

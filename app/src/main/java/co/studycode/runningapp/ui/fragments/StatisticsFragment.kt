@@ -33,19 +33,19 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
         barChart.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
             setDrawLabels(false)
-            axisLineColor = Color.WHITE
-            textColor = Color.WHITE
+            axisLineColor = R.color.orange
+            textColor = R.color.orange
             setDrawGridLines(false)
         }
 
         barChart.axisLeft.apply {
-            axisLineColor = Color.WHITE
-            textColor = Color.WHITE
+            axisLineColor = R.color.orange
+            textColor =R.color.orange
             setDrawGridLines(false)
 
             barChart.axisRight.apply {
-                axisLineColor = Color.WHITE
-                textColor = Color.WHITE
+                axisLineColor = R.color.orange
+                textColor = R.color.orange
                 setDrawGridLines(false)
             }
         }

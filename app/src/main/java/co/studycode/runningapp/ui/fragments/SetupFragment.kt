@@ -33,32 +33,32 @@ class SetupFragment :Fragment(R.layout.fragment_setup){
             findNavController().navigate(R.id.action_setupFragment_to_runFragment,savedInstanceState, navOptions)
 
         }
-        tvContinue.setOnClickListener {
-            val success = writePersonalDataToSharedPref()
-            if(success){
-                findNavController().navigate(R.id.action_setupFragment_to_runFragment)
-            }else{
-                Snackbar.make(requireView(), "Please enter all fields",Snackbar.LENGTH_SHORT).show()
-            }
-
-        }
+//        tvContinue.setOnClickListener {
+//            val success = writePersonalDataToSharedPref()
+//            if(success){
+//                findNavController().navigate(R.id.action_setupFragment_to_runFragment)
+//            }else{
+//                Snackbar.make(requireView(), "Please enter all fields",Snackbar.LENGTH_SHORT).show()
+//            }
+//
+//        }
     }
 
-    private fun writePersonalDataToSharedPref():Boolean{
-        val name = etName.text.toString()
-        val weight = etWeight.text.toString()
-        if(name.isEmpty()||weight.isEmpty()){
-            return false
-        }
-
-        sharedPref.edit()
-            .putString(KEY_NAME,name)
-            .putFloat(KEY_WEIGHT, weight.toFloat())
-            .putBoolean(KET_FIRST_TIME_TOGLE, false)
-            .apply()
-        val toolbarText = "Let's go , $name"
-        requireActivity().tvToolbarTitle.text = toolbarText
-        return true
-
-    }
+//    private fun writePersonalDataToSharedPref():Boolean{
+//        val name = etName.text.toString()
+//        val weight = etWeight.text.toString()
+//        if(name.isEmpty()||weight.isEmpty()){
+//            return false
+//        }
+//
+//        sharedPref.edit()
+//            .putString(KEY_NAME,name)
+//            .putFloat(KEY_WEIGHT, weight.toFloat())
+//            .putBoolean(KET_FIRST_TIME_TOGLE, false)
+//            .apply()
+//        val toolbarText = "Let's go , $name"
+//        requireActivity().tvToolbarTitle.text = toolbarText
+//        return true
+//
+//    }
 }
