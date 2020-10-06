@@ -2,6 +2,9 @@
     <string name="app_name">RunIt</string>
     <string name="google_maps_key"  templateMergeStrategy="preserve" translatable="false">AIzaSyDn2QSUDV5CChJHfUryKc2B4QYQNxYBedg</string>
     <string name="add_profile_image">App Profile Image</string>
+    <string name="full_name">Full Name</string>
+    <string name="share">Share</string>
+    <string name="cancel_run">Cancel Run</string>
 
     <string-array name="filter_options">
         <item>Date</item>

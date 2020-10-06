@@ -27,6 +27,7 @@ object Constants {
     const val KET_FIRST_TIME_TOGLE = "KET_FIRST_TIME_TOGLE"
     const val KEY_NAME = "KEY_NAME"
     const val KEY_WEIGHT="KEY_WEIGHT"
+    const val KEY_IMAGE = "KEY_IMAGE"
     const val CANCEL_TRACKING_DIALOG="CANCEL_TRACKING_DIALOG"
     //Camera
     const val REQUEST_PERMISSION = 100

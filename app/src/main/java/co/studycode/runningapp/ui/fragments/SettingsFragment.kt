@@ -17,11 +17,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import co.studycode.runningapp.R
-import co.studycode.runningapp.db.Profile
 import co.studycode.runningapp.ui.viewmodels.MainViewModel
 import co.studycode.runningapp.utils.Constants
+import co.studycode.runningapp.utils.Constants.KEY_IMAGE
 import co.studycode.runningapp.utils.Constants.KEY_NAME
 import co.studycode.runningapp.utils.Constants.KEY_WEIGHT
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -40,7 +41,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
         loadFieldsFromSharedPref()
         btnApplyChanges.setOnClickListener {
-            saveProfile()
             val success = applyChangesToSharedPref()
             if (success) {
                 Snackbar.make(view, "Saved Changes", Snackbar.LENGTH_LONG).show()
@@ -70,20 +70,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private fun loadFieldsFromSharedPref() {
         val name = sharedPref.getString(KEY_NAME, "")
         val weight = sharedPref.getFloat(KEY_WEIGHT, 63f)
+        val image = sharedPref.getString(KEY_IMAGE, "")
         etName.setText(name)
         etWeight.setText(weight.toString())
+        Glide.with(this).load(image).into(img)
     }
 
 
-    private fun saveProfile() {
-        val name = etName.text.toString()
-        val weight = etWeight.text.toString().toFloat()
-        val profileImg: Bitmap =
-            (img.getDrawable() as BitmapDrawable).getBitmap()
 
-        val profile = Profile(name, weight, profileImg)
-        viewModel.saveProfile(profile)
-    }
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)

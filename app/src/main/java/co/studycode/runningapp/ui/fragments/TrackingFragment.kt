@@ -161,7 +161,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     }
 
     private fun zoomToSeeWholeTrack() {
-        var bounds = LatLngBounds.Builder()
+        val bounds = LatLngBounds.Builder()
         for (polyline in pathPoints) {
             for (pos in polyline) {
                 bounds.include(pos)
@@ -189,7 +189,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             val dateTimeStamp = Calendar.getInstance().timeInMillis
             val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
             val run =
-                Run(bmp, dateTimeStamp, avgSpeed, distanceInMeters, curTimeInMillis, caloriesBurned)
+                Run(null, bmp, dateTimeStamp, avgSpeed, distanceInMeters, curTimeInMillis, caloriesBurned)
             viewModel.insertRun(run)
             Snackbar.make(
                 requireActivity().findViewById(R.id.rootView),

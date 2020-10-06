@@ -35,10 +35,6 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideProfileDao(db:AppDatabase) = db.getProfileao()
-
-    @Singleton
-    @Provides
     fun provideSharedPreferences(@ApplicationContext app: Context)= app.getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE)
 
     @Singleton
