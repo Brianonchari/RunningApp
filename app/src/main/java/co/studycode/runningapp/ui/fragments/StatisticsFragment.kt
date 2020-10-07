@@ -53,6 +53,10 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
             description.text = "Average Speed over time"
             legend.isEnabled = false
         }
+
+        barChart.setPinchZoom(true)
+        barChart.animateY(1000)
+        barChart.axisRight.setDrawLabels(false)
     }
 
     private fun subscribeToObservers() {
@@ -91,9 +95,10 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                 val allAvgSpeeds = it.indices.map { i -> BarEntry(i.toFloat(), it[i].avgSpeedInKMH) }
                 val barDataSet = BarDataSet(allAvgSpeeds," Avg Speed Over Time").apply {
                     valueTextColor = Color.WHITE
-                    color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
+                    color = ContextCompat.getColor(requireContext(), R.color.barchart_color)
                 }
                 barChart.data = BarData(barDataSet)
+                barChart.data.barWidth =0.2f
                 barChart.marker = CustomMarkerView(it.reversed(), requireContext(), R.layout.marker_view)
                 barChart.invalidate()
             }

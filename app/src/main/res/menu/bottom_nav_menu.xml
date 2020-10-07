@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/runFragment"
-        android:title="Your Runs"
+        android:title="@string/your_runs"
         android:icon="@drawable/ic_run"/>
     <item
         android:id="@+id/statisticsFragment"
-        android:title="Statistics"
-        android:icon="@drawable/ic_run"/>
+        android:title="@string/analytics"
+        android:icon="@drawable/ic_baseline_bar_chart_24"/>
 
     <item
         android:id="@+id/settingsFragment"
-        android:title="Settings"
+        android:title="@string/profile"
         android:icon="@drawable/ic_person_24"/>
 
 </menu>

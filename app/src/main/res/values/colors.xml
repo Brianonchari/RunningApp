@@ -23,6 +23,7 @@
 
     <color name="blueish">#103C62</color>
     <color name="orange">#E8692E</color>
+    <color name="barchart_color">#FBC7C3</color>
 
     <color name="marker_background">#03A9F4</color>
     <color name="colorPrimaryLight">#5C6BC0</color>

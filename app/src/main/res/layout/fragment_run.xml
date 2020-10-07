@@ -19,7 +19,7 @@
         android:id="@+id/tvFilterBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sort by:"
+        android:text="@string/filter_by"
         android:textSize="16sp"
         android:textColor="@color/blueish"
         app:layout_constraintBottom_toBottomOf="@+id/spFilter"

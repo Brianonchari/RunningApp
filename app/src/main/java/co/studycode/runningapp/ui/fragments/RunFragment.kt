@@ -3,7 +3,6 @@ package co.studycode.runningapp.ui.fragments
 import android.Manifest
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,38 +10,29 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import co.studycode.runningapp.R
 import co.studycode.runningapp.adapters.RunAdapter
 import co.studycode.runningapp.ui.viewmodels.MainViewModel
 import co.studycode.runningapp.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import co.studycode.runningapp.utils.SortType
 import co.studycode.runningapp.utils.TrackingUtility
-import com.google.android.gms.ads.*
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_run.*
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
-import timber.log.Timber
 
 
 @AndroidEntryPoint
 class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.PermissionCallbacks{
-    private lateinit var mInterstitialAd: InterstitialAd
     private val viewModel: MainViewModel by viewModels()
     private lateinit var runAdapter: RunAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mInterstitialAd = InterstitialAd(requireContext())
-        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
-        MobileAds.initialize(requireContext())
-//        MobileAds.setRequestConfiguration(
-//            RequestConfiguration.Builder()
-//                .setTestDeviceIds(listOf(""))
-//                .build()
-//        )
         requestPermissions()
         setupRecyclerView()
         val adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(
@@ -86,15 +76,38 @@ class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.Permission
             runAdapter.submitList(it)
         })
         fab.setOnClickListener {
-            if(mInterstitialAd.isLoaded){
-                mInterstitialAd.show()
-            }else{
-                Timber.d( "onViewCreated: j")
-                findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
+            findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
+        }
+
+        val itemTouchHelperobject = object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val run = runAdapter.differ.currentList[position]
+                viewModel.deleteRun(run)
+                Snackbar.make(view,"Item Deleted", Snackbar.LENGTH_LONG).apply {
+                    setAction("UNDO"){
+                        viewModel.insertRun(run)
+                    }
+                    show()
+                }
             }
         }
 
-        runAdEvents()
+        ItemTouchHelper(itemTouchHelperobject).apply {
+            attachToRecyclerView(rvRuns)
+        }
+
 
     }
 
@@ -147,19 +160,4 @@ class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.Permission
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults, this)
     }
-
-    private fun runAdEvents(){
-        mInterstitialAd.adListener = object : AdListener(){
-            override fun onAdClicked() {
-                super.onAdClicked()
-                mInterstitialAd.adListener.onAdClosed()
-            }
-
-            override fun onAdClosed() {
-                super.onAdClosed()
-                findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
-            }
-        }
-    }
-
 }

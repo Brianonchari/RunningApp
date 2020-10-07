@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import co.studycode.runningapp.R
 import co.studycode.runningapp.ui.MainActivity
 import co.studycode.runningapp.ui.viewmodels.MainViewModel
 import co.studycode.runningapp.utils.TrackingUtility
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -24,7 +26,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val run = args.run
         val runImg= run?.img
@@ -53,4 +54,21 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             startActivity(Intent.createChooser(shareIntent, "text"))
         }
     }
+
+//    private fun runAdEvents(){
+//        mInterstitialAd.adListener = object : AdListener(){
+//            override fun onAdClicked() {
+//                super.onAdClicked()
+//            }
+//
+//            override fun onAdClosed() {
+//                super.onAdClosed()
+//                findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
+//            }
+//
+//            override fun onAdLoaded() {
+//                super.onAdLoaded()
+//            }
+//        }
+//    }
 }

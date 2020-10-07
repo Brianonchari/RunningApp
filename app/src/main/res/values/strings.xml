@@ -5,6 +5,10 @@
     <string name="full_name">Full Name</string>
     <string name="share">Share</string>
     <string name="cancel_run">Cancel Run</string>
+    <string name="profile">Profile</string>
+    <string name="analytics">Analytics</string>
+    <string name="your_runs">Your Runs</string>
+    <string name="filter_by">Filter By:</string>
 
     <string-array name="filter_options">
         <item>Date</item>

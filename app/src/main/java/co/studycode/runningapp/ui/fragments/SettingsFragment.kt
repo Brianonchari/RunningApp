@@ -23,6 +23,10 @@ import co.studycode.runningapp.utils.Constants.KEY_IMAGE
 import co.studycode.runningapp.utils.Constants.KEY_NAME
 import co.studycode.runningapp.utils.Constants.KEY_WEIGHT
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -32,7 +36,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
-
+    lateinit var mAdView : AdView
     @Inject
     lateinit var sharedPref: SharedPreferences
     private val viewModel: MainViewModel by viewModels()
@@ -40,6 +44,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadFieldsFromSharedPref()
+        MobileAds.initialize(requireContext())
+        val adRequest = AdRequest.Builder().build()
+        adview.loadAd(adRequest)
         btnApplyChanges.setOnClickListener {
             val success = applyChangesToSharedPref()
             if (success) {
@@ -137,6 +144,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 val uri = data?.getData()
                 img.setImageURI(uri)
             }
+        }
+    }
+
+    private fun runAdEvents(){
+        adview.adListener = object : AdListener(){
+            override fun onAdClicked() {
+                super.onAdClicked()
+            }
+
         }
     }
 }

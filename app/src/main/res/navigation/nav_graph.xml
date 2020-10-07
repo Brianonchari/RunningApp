@@ -10,7 +10,11 @@
     <fragment
         android:id="@+id/runFragment"
         android:name="co.studycode.runningapp.ui.fragments.RunFragment"
-        android:label="RunFragment" >
+        android:label="RunFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_in_right">
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
@@ -26,11 +30,19 @@
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="co.studycode.runningapp.ui.fragments.StatisticsFragment"
-        android:label="StatisticsFragment" />
+        android:label="StatisticsFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_in_right"/>
     <fragment
         android:id="@+id/trackingFragment"
         android:name="co.studycode.runningapp.ui.fragments.TrackingFragment"
-        android:label="TrackingFragment" >
+        android:label="TrackingFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_in_right">
         <action
             android:id="@+id/action_trackingFragment_to_runFragment"
             app:destination="@id/runFragment" />
@@ -42,7 +54,11 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="co.studycode.runningapp.ui.fragments.DetailFragment"
-        android:label="DetailFragment" >
+        android:label="DetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_in_right">
         <argument
             android:name="run"
             app:argType="co.studycode.runningapp.db.Run"

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="DATE"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="DURATION"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
@@ -27,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/white"
         android:text="AVG SPEED"
         android:textSize="20sp" />
 
@@ -36,6 +39,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="DISTANCE"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
@@ -43,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/white"
         android:text="CALORIES BURNED"
         android:textSize="20sp" />
 
