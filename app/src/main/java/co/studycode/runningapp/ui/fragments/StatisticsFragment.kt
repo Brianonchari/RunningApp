@@ -3,6 +3,7 @@ package co.studycode.runningapp.ui.fragments
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -77,10 +78,13 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
         })
 
         viewModel.totalAvgSpeed.observe(viewLifecycleOwner, Observer {
-            val avgSpeed = round(it * 10f) / 10f
-            val avgSpeedString = "${avgSpeed}km/h"
-            tvAverageSpeed.text = avgSpeedString
-
+            if(it!=null) {
+                val avgSpeed = round(it * 10f) / 10f
+                val avgSpeedString = "${avgSpeed}km/h"
+                tvAverageSpeed.text = avgSpeedString
+            }else{
+                Toast.makeText(requireContext(), "No data ", Toast.LENGTH_LONG).show()
+            }
         })
 
         viewModel.totalKclBurned.observe(viewLifecycleOwner, Observer {

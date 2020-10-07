@@ -36,10 +36,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
-    lateinit var mAdView : AdView
     @Inject
     lateinit var sharedPref: SharedPreferences
-    private val viewModel: MainViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,63 +53,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 Snackbar.make(view, "Please fill out all fielda", Snackbar.LENGTH_LONG).show()
             }
         }
-        img.setOnClickListener {
-            val mDialogView =
-                LayoutInflater.from(requireContext()).inflate(R.layout.custom_dialog, null)
-            val dialogBuilder = AlertDialog.Builder(requireContext())
-                .setView(mDialogView)
-                .setTitle("Choose Image")
-            val mAlertDialog = dialogBuilder.show()
-
-            mDialogView.gallery_tv.setOnClickListener {
-                mAlertDialog.dismiss()
-                openGallery()
-            }
-            mDialogView.camera_tv.setOnClickListener {
-                openCamera()
-                mAlertDialog.dismiss()
-            }
-        }
     }
 
     private fun loadFieldsFromSharedPref() {
         val name = sharedPref.getString(KEY_NAME, "")
         val weight = sharedPref.getFloat(KEY_WEIGHT, 63f)
-        val image = sharedPref.getString(KEY_IMAGE, "")
         etName.setText(name)
         etWeight.setText(weight.toString())
-        Glide.with(this).load(image).into(img)
+
     }
-
-
-
-
-    private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, Constants.REQUEST_PICK_IMAGE)
-    }
-
-    private fun openCamera() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { intent ->
-            intent.resolveActivity(requireActivity().packageManager)?.also {
-                startActivityForResult(intent, Constants.REQUEST_IMAGE_CAPTURE)
-            }
-        }
-    }
-
-    private fun checkCameraPermission() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.CAMERA),
-                Constants.REQUEST_PERMISSION
-            )
-        }
-    }
-
 
     private fun applyChangesToSharedPref(): Boolean {
         val nameText = etName.text.toString()
@@ -123,36 +73,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             .putString(KEY_NAME, nameText)
             .putFloat(KEY_WEIGHT, weightText.toFloat())
             .apply()
-
-        val toolbarText = "Let's go $nameText"
-        requireActivity().tvToolbarTitle.text = toolbarText
         return true
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        checkCameraPermission()
-    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == AppCompatActivity.RESULT_OK) {
-            if (requestCode == Constants.REQUEST_IMAGE_CAPTURE) {
-                val bitmap = data?.extras?.get("data") as Bitmap
-                img.setImageBitmap(bitmap)
-            } else if (requestCode == Constants.REQUEST_PICK_IMAGE) {
-                val uri = data?.getData()
-                img.setImageURI(uri)
-            }
-        }
-    }
-
-    private fun runAdEvents(){
-        adview.adListener = object : AdListener(){
-            override fun onAdClicked() {
-                super.onAdClicked()
-            }
-
-        }
-    }
 }

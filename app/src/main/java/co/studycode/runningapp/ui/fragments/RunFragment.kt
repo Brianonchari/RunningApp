@@ -73,7 +73,13 @@ class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.Permission
             }
         }
         viewModel.runs.observe(viewLifecycleOwner, Observer {
-            runAdapter.submitList(it)
+            if(it.isEmpty()){
+                no_contentTv.visibility = View.VISIBLE
+            }else{
+                runAdapter.submitList(it)
+                no_contentTv.visibility= View.INVISIBLE
+            }
+
         })
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
