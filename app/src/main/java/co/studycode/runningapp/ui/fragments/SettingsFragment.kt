@@ -33,6 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.nav_header.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -63,6 +64,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         val weight = sharedPref.getFloat(KEY_WEIGHT, 63f)
         etName.setText(name)
         etWeight.setText(weight.toString())
+//        drawr_name?.text=name
 
     }
 

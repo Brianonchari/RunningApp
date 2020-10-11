@@ -27,7 +27,6 @@
         <item name="colorPrimaryVariant">@android:color/white</item>
         <item name="colorSecondaryVariant">@color/md_blue_400</item>
 
-
         <!--            toolbar color -->
         <item name="colorSurface">@color/green_chalk</item>
         <item name="colorOnPrimary">@color/md_blue_50</item>

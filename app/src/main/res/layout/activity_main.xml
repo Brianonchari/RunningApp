@@ -16,8 +16,9 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/green_chalk"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:navigationIcon="@drawable/ic_baseline_dehaze_24"
             app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/app_name"
             app:titleTextColor="@color/white" />
 
         <FrameLayout
@@ -59,5 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_nav" />
 </androidx.drawerlayout.widget.DrawerLayout>
