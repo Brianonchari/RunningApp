@@ -8,7 +8,6 @@ import co.studycode.runningapp.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_about.*
 import kotlinx.android.synthetic.main.fragment_about.view.*
-import kotlinx.android.synthetic.main.fragment_about.webView
 
 @AndroidEntryPoint
 class AboutFragment :Fragment(R.layout.fragment_about){

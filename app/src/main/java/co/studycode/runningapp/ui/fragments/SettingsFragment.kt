@@ -55,9 +55,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
         }
 
-        privacy_policy.setOnClickListener {
-            findNavController().navigate(R.id.aboutFragment)
-        }
+
     }
 
     private fun loadFieldsFromSharedPref() {

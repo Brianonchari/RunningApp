@@ -72,5 +72,5 @@
     <fragment
         android:id="@+id/termsFragment"
         android:name="co.studycode.runningapp.ui.fragments.TermsFragment"
-        android:label="TermsFragment" />
+        android:label="Terms &amp; Conditions" />
 </navigation>

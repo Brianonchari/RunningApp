@@ -18,11 +18,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(appBarLayout)
+//        setSupportActionBar(appBarLayout)
         navigateToTrackingFragmentIfNeeded(intent)
         bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
         bottomNavigationView.setOnNavigationItemReselectedListener {/* NO-OP */ }
