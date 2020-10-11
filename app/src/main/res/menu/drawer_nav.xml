@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/runFragment"
+            android:icon="@drawable/ic_run"
+            android:title="@string/your_runs" />
+        <item
+            android:id="@+id/statisticsFragment"
+            android:icon="@drawable/ic_baseline_bar_chart_24"
+            android:title="@string/analytics" />
+
+        <item
+            android:id="@+id/settingsFragment"
+            android:icon="@drawable/ic_person_24"
+            android:title="@string/profile" />
+
+        <item android:title="@string/policies">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/aboutFragment"
+                        android:title="@string/privacy_policy" />
+                    <item
+                        android:id="@+id/termsFragment"
+                        android:title="@string/terms_and_conditions" />
+                </group>
+            </menu>
+        </item>
+    </group>
+</menu>

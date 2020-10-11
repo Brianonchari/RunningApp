@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import co.studycode.runningapp.R
 import co.studycode.runningapp.ui.viewmodels.MainViewModel
 import co.studycode.runningapp.utils.Constants
@@ -50,8 +51,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             if (success) {
                 Snackbar.make(view, "Saved Changes", Snackbar.LENGTH_LONG).show()
             } else {
-                Snackbar.make(view, "Please fill out all fielda", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(view, "Please fill out all fields", Snackbar.LENGTH_LONG).show()
             }
+        }
+
+        privacy_policy.setOnClickListener {
+            findNavController().navigate(R.id.aboutFragment)
         }
     }
 

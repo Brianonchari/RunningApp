@@ -10,7 +10,7 @@
     <fragment
         android:id="@+id/runFragment"
         android:name="co.studycode.runningapp.ui.fragments.RunFragment"
-        android:label="RunFragment"
+        android:label="My Runs"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/setupFragment"
         android:name="co.studycode.runningapp.ui.fragments.SetupFragment"
-        android:label="SetupFragment" >
+        android:label="Setup" >
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
             app:destination="@id/runFragment" />
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="co.studycode.runningapp.ui.fragments.StatisticsFragment"
-        android:label="StatisticsFragment"
+        android:label="Analytics"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/trackingFragment"
         android:name="co.studycode.runningapp.ui.fragments.TrackingFragment"
-        android:label="TrackingFragment"
+        android:label="Tracking"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
@@ -50,11 +50,11 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="co.studycode.runningapp.ui.fragments.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="Profile" />
     <fragment
         android:id="@+id/detailFragment"
         android:name="co.studycode.runningapp.ui.fragments.DetailFragment"
-        android:label="DetailFragment"
+        android:label="Run Detail"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
@@ -65,4 +65,12 @@
             app:nullable="true"
             android:defaultValue="@null"/>
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="co.studycode.runningapp.ui.fragments.AboutFragment"
+        android:label="Privacy" />
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="co.studycode.runningapp.ui.fragments.TermsFragment"
+        android:label="TermsFragment" />
 </navigation>
