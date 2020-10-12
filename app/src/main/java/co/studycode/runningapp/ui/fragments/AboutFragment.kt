@@ -17,7 +17,6 @@ class AboutFragment :Fragment(R.layout.fragment_about){
         webView.apply {
             webViewClient =WebViewClient()
             webView.loadUrl("file:///android_asset/privacy_policy.html")
-
         }
         webView.settings.apply {
             javaScriptEnabled = true

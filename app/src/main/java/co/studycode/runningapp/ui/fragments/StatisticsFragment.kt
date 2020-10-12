@@ -23,7 +23,6 @@ import java.lang.Math.round
 @AndroidEntryPoint
 class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
     private val viewModel: StatisticsViewModel by viewModels()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeToObservers()
@@ -54,7 +53,6 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
             description.text = "Average Speed over time"
             legend.isEnabled = false
         }
-
         barChart.setPinchZoom(true)
         barChart.animateY(1000)
         barChart.axisRight.setDrawLabels(false)
@@ -107,6 +105,5 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                 barChart.invalidate()
             }
         })
-
     }
 }

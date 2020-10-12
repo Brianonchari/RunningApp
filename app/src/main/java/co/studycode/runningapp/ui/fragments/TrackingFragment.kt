@@ -39,9 +39,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     private var curTimeInMillis = 0L
 
     @set:Inject
-    var weight = 63f
+    var weight = 65f
     private var menu: Menu? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

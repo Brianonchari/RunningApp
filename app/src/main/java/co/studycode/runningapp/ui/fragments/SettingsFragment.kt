@@ -1,46 +1,24 @@
 package co.studycode.runningapp.ui.fragments
 
-import android.Manifest
-import android.app.AlertDialog
-import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.provider.MediaStore
-import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import co.studycode.runningapp.R
-import co.studycode.runningapp.ui.viewmodels.MainViewModel
-import co.studycode.runningapp.utils.Constants
-import co.studycode.runningapp.utils.Constants.KEY_IMAGE
 import co.studycode.runningapp.utils.Constants.KEY_NAME
 import co.studycode.runningapp.utils.Constants.KEY_WEIGHT
-import com.bumptech.glide.Glide
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.custom_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.nav_header.*
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
     @Inject
     lateinit var sharedPref: SharedPreferences
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadFieldsFromSharedPref()
@@ -55,8 +33,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 Snackbar.make(view, "Please fill out all fields", Snackbar.LENGTH_LONG).show()
             }
         }
-
-
     }
 
     private fun loadFieldsFromSharedPref() {
@@ -64,8 +40,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         val weight = sharedPref.getFloat(KEY_WEIGHT, 63f)
         etName.setText(name)
         etWeight.setText(weight.toString())
-//        drawr_name?.text=name
-
     }
 
     private fun applyChangesToSharedPref(): Boolean {
@@ -80,6 +54,4 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             .apply()
         return true
     }
-
-
 }
