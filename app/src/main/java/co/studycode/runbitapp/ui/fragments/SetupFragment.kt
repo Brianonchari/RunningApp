@@ -10,9 +10,13 @@ import co.studycode.runningapp.R
 import co.studycode.runningapp.utils.Constants.KET_FIRST_TIME_TOGLE
 import co.studycode.runningapp.utils.Constants.KEY_NAME
 import co.studycode.runningapp.utils.Constants.KEY_WEIGHT
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_setup.*
+import kotlinx.android.synthetic.main.fragment_setup.adview
 import javax.inject.Inject
 
 
@@ -24,6 +28,9 @@ class SetupFragment : Fragment(R.layout.fragment_setup) {
     var isFirstTime = true
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MobileAds.initialize(requireContext())
+        val adRequest = AdRequest.Builder().build()
+        adview.loadAd(adRequest)
         if (!isFirstTime) {
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.setupFragment, true)

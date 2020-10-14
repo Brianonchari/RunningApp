@@ -16,8 +16,8 @@ class TermsFragment: Fragment(R.layout.fragment_terms){
             webViewClient = WebViewClient()
             terms_webview.loadUrl("file:///android_asset/terms_and_conditions.html")
         }
-        terms_webview.settings.apply {
-            javaScriptEnabled = true
-        }
+//        terms_webview.settings.apply {
+//            javaScriptEnabled = true
+//        }
     }
 }

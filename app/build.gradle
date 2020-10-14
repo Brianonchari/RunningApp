@@ -11,12 +11,21 @@ android {
 
     defaultConfig {
         applicationId "co.studycode.runningapp"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 2
-        versionName "2.0"
+        versionName "1.0.0-beta"
         resConfigs "en"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs{
+        debug{
+            keyAlias 'upload'
+            keyPassword 'Street*30'
+            storeFile file('C:\\Users\\BrianOnchari\\Desktop\\keystore\\runbit.jks')
+            storePassword 'Street*30'
+        }
     }
 
     buildTypes {
@@ -25,6 +34,9 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+//        debug{
+//            signingConfig signingConfigs.key
+//        }
     }
 
     compileOptions {

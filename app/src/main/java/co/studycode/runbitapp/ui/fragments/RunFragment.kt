@@ -19,17 +19,20 @@ import co.studycode.runningapp.ui.viewmodels.MainViewModel
 import co.studycode.runningapp.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import co.studycode.runningapp.utils.SortType
 import co.studycode.runningapp.utils.TrackingUtility
+import com.google.android.gms.ads.*
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_run.*
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import timber.log.Timber
 
 
 @AndroidEntryPoint
-class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.PermissionCallbacks{
+class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionCallbacks {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var runAdapter: RunAdapter
+    private lateinit var mInterstitialAd: InterstitialAd
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,21 +44,27 @@ class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.Permission
         )
         adapter.setDropDownViewResource(R.layout.spinner_item)
         spFilter.adapter = adapter
+        //Interstitial ads
+        MobileAds.initialize(requireContext()) {}
+        mInterstitialAd = InterstitialAd(requireContext())
+        mInterstitialAd.adUnitId = "ca-app-pub-7628201468416367/2150313203"
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+        runAdEvents()
 
         runAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
-            putSerializable("run", it)
+                putSerializable("run", it)
             }
             findNavController().navigate(R.id.detailFragment, bundle)
         }
-        when(viewModel.sortType){
+        when (viewModel.sortType) {
             SortType.DATE -> spFilter.setSelection(0)
             SortType.RUNNING_TIME -> spFilter.setSelection(1)
             SortType.DISTANCE -> spFilter.setSelection(2)
             SortType.AVG_SPEED -> spFilter.setSelection(3)
             SortType.CALLORIES_BURNED -> spFilter.setSelection(4)
         }
-        spFilter.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+        spFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(
                 adapterView: AdapterView<*>?,
@@ -63,26 +72,31 @@ class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.Permission
                 position: Int,
                 id: Long
             ) {
-                when(position){
-                    0-> viewModel.sortRuns(SortType.DATE)
-                    1-> viewModel.sortRuns(SortType.RUNNING_TIME)
-                    2-> viewModel.sortRuns(SortType.DISTANCE)
-                    3-> viewModel.sortRuns(SortType.AVG_SPEED)
-                    4-> viewModel.sortRuns(SortType.CALLORIES_BURNED)
+                when (position) {
+                    0 -> viewModel.sortRuns(SortType.DATE)
+                    1 -> viewModel.sortRuns(SortType.RUNNING_TIME)
+                    2 -> viewModel.sortRuns(SortType.DISTANCE)
+                    3 -> viewModel.sortRuns(SortType.AVG_SPEED)
+                    4 -> viewModel.sortRuns(SortType.CALLORIES_BURNED)
                 }
             }
         }
         viewModel.runs.observe(viewLifecycleOwner, Observer {
-            if(it.isEmpty()){
+            if (it.isEmpty()) {
                 no_contentTv.visibility = View.VISIBLE
-            }else{
+            } else {
                 runAdapter.submitList(it)
-                no_contentTv.visibility= View.INVISIBLE
+                no_contentTv.visibility = View.INVISIBLE
             }
 
         })
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
+            if (mInterstitialAd.isLoaded) {
+                mInterstitialAd.show()
+            } else {
+                Timber.d("The interstitial wasn't loaded yet.")
+            }
         }
 
         val itemTouchHelperobject = object : ItemTouchHelper.SimpleCallback(
@@ -101,8 +115,8 @@ class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.Permission
                 val position = viewHolder.adapterPosition
                 val run = runAdapter.differ.currentList[position]
                 viewModel.deleteRun(run)
-                Snackbar.make(view,"Item Deleted", Snackbar.LENGTH_LONG).apply {
-                    setAction("UNDO"){
+                Snackbar.make(view, "Item Deleted", Snackbar.LENGTH_LONG).apply {
+                    setAction("UNDO") {
                         viewModel.insertRun(run)
                     }
                     show()
@@ -123,6 +137,7 @@ class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.Permission
         layoutManager = LinearLayoutManager(requireContext())
 
     }
+
     //Request Permissions
     private fun requestPermissions() {
         if (TrackingUtility.hasLocationPermisions(requireContext())) {
@@ -149,14 +164,14 @@ class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.Permission
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        if(EasyPermissions.somePermissionPermanentlyDenied(this, perms)){
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             AppSettingsDialog.Builder(this).build().show()
-        }else{
+        } else {
             requestPermissions()
         }
     }
 
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) { }
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -164,6 +179,24 @@ class RunFragment : Fragment(R.layout.fragment_run) , EasyPermissions.Permission
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults, this)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+
+    private fun runAdEvents() {
+        mInterstitialAd.adListener = object : AdListener() {
+            override fun onAdClosed() {
+                mInterstitialAd.loadAd(AdRequest.Builder().build())
+            }
+
+            override fun onAdClicked() {
+                super.onAdClicked()
+                findNavController().navigate(R.id.trackingFragment)
+            }
+            override fun onAdFailedToLoad(p0: LoadAdError?) {
+                super.onAdFailedToLoad(p0)
+                Timber.d("Ad failed to load ${p0?.message}")
+            }
+        }
     }
 }
