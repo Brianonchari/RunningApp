@@ -1,4 +1,4 @@
-package co.studycode.runningapp.adapters
+package co.studycode.runbitapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import co.studycode.runningapp.R
-import co.studycode.runningapp.db.Run
-import co.studycode.runningapp.utils.TrackingUtility
+import co.studycode.runbitapp.R
+import co.studycode.runbitapp.db.Run
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_run.view.*
 import java.text.SimpleDateFormat
@@ -16,7 +15,9 @@ import java.util.*
 
 class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
     private var onItemClickListener: ((Run) -> Unit)? = null
+
     inner class RunViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
     val diffCallBack = object : DiffUtil.ItemCallback<Run>() {
         override fun areItemsTheSame(oldItem: Run, newItem: Run): Boolean {
             return oldItem.id == newItem.id
@@ -56,16 +57,8 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
             val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
             tvDate.text = dateFormat.format(calender.time)
 
-//            val avgSpeed = "${run.avgSpeedInKMH}km/h"
-//            tvAvgSpeed.text = avgSpeed
-//
             val distanceInKm = "${run.distanceInMeters / 1000f}Km"
             tvDistance.text = distanceInKm
-//
-//            tvTime.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMilis)
-//
-//            val calloriesBurned = "${run.caloriesBurned}kcal"
-//            tvCalories.text = calloriesBurned
 
             setOnClickListener {
                 onItemClickListener?.let { it(run) }

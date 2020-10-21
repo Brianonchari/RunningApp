@@ -1,15 +1,15 @@
-package co.studycode.runningapp.di
+package co.studycode.runbitapp.di
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import androidx.room.Room
-import co.studycode.runningapp.db.AppDatabase
-import co.studycode.runningapp.utils.Constants.APP_DATABASE_NAME
-import co.studycode.runningapp.utils.Constants.KET_FIRST_TIME_TOGLE
-import co.studycode.runningapp.utils.Constants.KEY_NAME
-import co.studycode.runningapp.utils.Constants.KEY_WEIGHT
-import co.studycode.runningapp.utils.Constants.SHARED_PREF_NAME
+import co.studycode.runbitapp.db.AppDatabase
+import co.studycode.runbitapp.utils.Constants.APP_DATABASE_NAME
+import co.studycode.runbitapp.utils.Constants.KET_FIRST_TIME_TOGLE
+import co.studycode.runbitapp.utils.Constants.KEY_NAME
+import co.studycode.runbitapp.utils.Constants.KEY_WEIGHT
+import co.studycode.runbitapp.utils.Constants.SHARED_PREF_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

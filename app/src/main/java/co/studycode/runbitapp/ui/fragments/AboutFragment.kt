@@ -1,10 +1,10 @@
-package co.studycode.runningapp.ui.fragments
+package co.studycode.runbitapp.ui.fragments
 
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import co.studycode.runningapp.R
+import co.studycode.runbitapp.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_about.*
 import kotlinx.android.synthetic.main.fragment_about.view.*

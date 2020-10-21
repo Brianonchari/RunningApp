@@ -1,4 +1,4 @@
-package co.studycode.runningapp.ui.fragments
+package co.studycode.runbitapp.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import co.studycode.runningapp.R
-import co.studycode.runningapp.ui.viewmodels.MainViewModel
-import co.studycode.runningapp.utils.TrackingUtility
+import co.studycode.runbitapp.R
+import co.studycode.runbitapp.ui.viewmodels.MainViewModel
+import co.studycode.runbitapp.utils.TrackingUtility
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -32,8 +32,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         val _kcalBurned = run?.caloriesBurned
         val _avgSpeed = run?.avgSpeedInKMH
         val totalRunTime = _timeTaken?.let { TrackingUtility.getFormattedStopWatchTime(it) }
+        val playstore_link = "https://play.google.com/store/apps/details?id=co.studycode.runbitapp"
 
-        val share = "Today I ran/walked for $totalRunTime , covered $distance Metres and burned $_kcalBurned calories.Checkout Runit on playstore and try it."
+        val share = "Today I ran/walked for $totalRunTime , covered $distance Metres and burned $_kcalBurned calories.Checkout Runit on playstore $playstore_link and try it."
 
         Glide.with(this).load(runImg).into(detailImg)
         distanceCoverd.text = "${distanceInKm}Km"

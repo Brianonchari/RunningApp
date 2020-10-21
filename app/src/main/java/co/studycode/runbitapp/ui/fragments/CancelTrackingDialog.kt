@@ -1,10 +1,10 @@
-package co.studycode.runningapp.ui.fragments
+package co.studycode.runbitapp.ui.fragments
 
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import co.studycode.runningapp.R
+import co.studycode.runbitapp.R
 
 class CancelTrackingDialog :DialogFragment(){
     private var _listener:(()-> Unit)? = null

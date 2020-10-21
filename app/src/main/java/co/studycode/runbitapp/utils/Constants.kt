@@ -1,4 +1,4 @@
-package co.studycode.runningapp.utils
+package co.studycode.runbitapp.utils
 
 import android.graphics.Color
 

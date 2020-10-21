@@ -7,5 +7,4 @@
         android:title="@string/cancel_run"
         android:visible="false"
         app:showAsAction="always"/>
-
 </menu>

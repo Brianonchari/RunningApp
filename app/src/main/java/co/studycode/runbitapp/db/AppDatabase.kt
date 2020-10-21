@@ -1,4 +1,4 @@
-package co.studycode.runningapp.db
+package co.studycode.runbitapp.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

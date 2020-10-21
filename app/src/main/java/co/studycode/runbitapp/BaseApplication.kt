@@ -1,4 +1,4 @@
-package co.studycode.runningapp
+package co.studycode.runbitapp
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

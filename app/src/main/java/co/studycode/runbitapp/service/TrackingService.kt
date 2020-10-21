@@ -1,4 +1,4 @@
-package co.studycode.runningapp.service
+package co.studycode.runbitapp.service
 
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
@@ -16,17 +16,17 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import co.studycode.runningapp.R
-import co.studycode.runningapp.utils.Constants.ACTION_PAUSE_SERVICE
-import co.studycode.runningapp.utils.Constants.ACTION_START_OR_RESUME_SERVICE
-import co.studycode.runningapp.utils.Constants.ACTION_STOP_SERVICE
-import co.studycode.runningapp.utils.Constants.FASTEST_LOCATION_INTERVAL
-import co.studycode.runningapp.utils.Constants.LOCATION_UPDATES_INTERVAL
-import co.studycode.runningapp.utils.Constants.NOTIFICATION_CHANNEL_ID
-import co.studycode.runningapp.utils.Constants.NOTIFICATION_ID
-import co.studycode.runningapp.utils.Constants.NOTIFICATION_NAME
-import co.studycode.runningapp.utils.Constants.TIMER_UPDATE_INTERVAL
-import co.studycode.runningapp.utils.TrackingUtility
+import co.studycode.runbitapp.R
+import co.studycode.runbitapp.utils.Constants.ACTION_PAUSE_SERVICE
+import co.studycode.runbitapp.utils.Constants.ACTION_START_OR_RESUME_SERVICE
+import co.studycode.runbitapp.utils.Constants.ACTION_STOP_SERVICE
+import co.studycode.runbitapp.utils.Constants.FASTEST_LOCATION_INTERVAL
+import co.studycode.runbitapp.utils.Constants.LOCATION_UPDATES_INTERVAL
+import co.studycode.runbitapp.utils.Constants.NOTIFICATION_CHANNEL_ID
+import co.studycode.runbitapp.utils.Constants.NOTIFICATION_ID
+import co.studycode.runbitapp.utils.Constants.NOTIFICATION_NAME
+import co.studycode.runbitapp.utils.Constants.TIMER_UPDATE_INTERVAL
+import co.studycode.runbitapp.utils.TrackingUtility
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest

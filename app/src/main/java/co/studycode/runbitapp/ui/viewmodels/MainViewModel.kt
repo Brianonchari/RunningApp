@@ -1,12 +1,12 @@
-package co.studycode.runningapp.ui.viewmodels
+package co.studycode.runbitapp.ui.viewmodels
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.studycode.runningapp.db.Run
-import co.studycode.runningapp.repositories.MainRepository
-import co.studycode.runningapp.utils.SortType
+import co.studycode.runbitapp.db.Run
+import co.studycode.runbitapp.repositories.MainRepository
+import co.studycode.runbitapp.utils.SortType
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(

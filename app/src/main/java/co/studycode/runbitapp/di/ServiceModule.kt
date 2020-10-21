@@ -1,12 +1,12 @@
-package co.studycode.runningapp.di
+package co.studycode.runbitapp.di
 
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
-import co.studycode.runningapp.R
-import co.studycode.runningapp.ui.MainActivity
-import co.studycode.runningapp.utils.Constants
+import co.studycode.runbitapp.R
+import co.studycode.runbitapp.ui.MainActivity
+import co.studycode.runbitapp.utils.Constants
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.Module
 import dagger.Provides

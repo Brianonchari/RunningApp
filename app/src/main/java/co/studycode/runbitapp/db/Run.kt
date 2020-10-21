@@ -1,4 +1,4 @@
-package co.studycode.runningapp.db
+package co.studycode.runbitapp.db
 
 import android.graphics.Bitmap
 import androidx.room.Entity

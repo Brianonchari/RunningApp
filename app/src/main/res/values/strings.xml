@@ -12,6 +12,7 @@
     <string name="policies">Policies</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="weight">Weight</string>
 
     <string-array name="filter_options">
         <item>Date</item>

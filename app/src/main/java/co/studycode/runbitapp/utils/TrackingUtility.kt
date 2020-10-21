@@ -1,10 +1,10 @@
-package co.studycode.runningapp.utils
+package co.studycode.runbitapp.utils
 
 import android.Manifest
 import android.content.Context
 import android.location.Location
 import android.os.Build
-import co.studycode.runningapp.service.Polyline
+import co.studycode.runbitapp.service.Polyline
 import pub.devrel.easypermissions.EasyPermissions
 import java.util.concurrent.TimeUnit
 

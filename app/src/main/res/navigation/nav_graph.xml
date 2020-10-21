@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/runFragment"
-        android:name="co.studycode.runningapp.ui.fragments.RunFragment"
+        android:name="co.studycode.runbitapp.ui.fragments.RunFragment"
         android:label="My Runs"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/setupFragment"
-        android:name="co.studycode.runningapp.ui.fragments.SetupFragment"
+        android:name="co.studycode.runbitapp.ui.fragments.SetupFragment"
         android:label="Setup" >
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="co.studycode.runningapp.ui.fragments.StatisticsFragment"
+        android:name="co.studycode.runbitapp.ui.fragments.StatisticsFragment"
         android:label="Analytics"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
@@ -37,7 +37,7 @@
         app:popExitAnim="@anim/slide_in_right"/>
     <fragment
         android:id="@+id/trackingFragment"
-        android:name="co.studycode.runningapp.ui.fragments.TrackingFragment"
+        android:name="co.studycode.runbitapp.ui.fragments.TrackingFragment"
         android:label="Tracking"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
@@ -49,11 +49,11 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="co.studycode.runningapp.ui.fragments.SettingsFragment"
+        android:name="co.studycode.runbitapp.ui.fragments.SettingsFragment"
         android:label="Profile" />
     <fragment
         android:id="@+id/detailFragment"
-        android:name="co.studycode.runningapp.ui.fragments.DetailFragment"
+        android:name="co.studycode.runbitapp.ui.fragments.DetailFragment"
         android:label="Run Detail"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
@@ -61,16 +61,16 @@
         app:popExitAnim="@anim/slide_in_right">
         <argument
             android:name="run"
-            app:argType="co.studycode.runningapp.db.Run"
+            app:argType="co.studycode.runbitapp.db.Run"
             app:nullable="true"
             android:defaultValue="@null"/>
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="co.studycode.runningapp.ui.fragments.AboutFragment"
+        android:name="co.studycode.runbitapp.ui.fragments.AboutFragment"
         android:label="Privacy" />
     <fragment
         android:id="@+id/termsFragment"
-        android:name="co.studycode.runningapp.ui.fragments.TermsFragment"
+        android:name="co.studycode.runbitapp.ui.fragments.TermsFragment"
         android:label="Terms &amp; Conditions" />
 </navigation>

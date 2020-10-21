@@ -1,8 +1,8 @@
-package co.studycode.runningapp.ui.viewmodels
+package co.studycode.runbitapp.ui.viewmodels
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
-import co.studycode.runningapp.repositories.MainRepository
+import co.studycode.runbitapp.repositories.MainRepository
 
 class StatisticsViewModel @ViewModelInject constructor(
     val mainRepository: MainRepository

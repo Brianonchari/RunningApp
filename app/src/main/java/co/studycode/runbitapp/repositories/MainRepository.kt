@@ -1,7 +1,7 @@
-package co.studycode.runningapp.repositories
+package co.studycode.runbitapp.repositories
 
-import co.studycode.runningapp.db.Run
-import co.studycode.runningapp.db.RunDao
+import co.studycode.runbitapp.db.Run
+import co.studycode.runbitapp.db.RunDao
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(

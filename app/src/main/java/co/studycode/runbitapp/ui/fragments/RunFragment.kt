@@ -1,4 +1,4 @@
-package co.studycode.runningapp.ui.fragments
+package co.studycode.runbitapp.ui.fragments
 
 import android.Manifest
 import android.os.Build
@@ -13,12 +13,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.studycode.runningapp.R
-import co.studycode.runningapp.adapters.RunAdapter
-import co.studycode.runningapp.ui.viewmodels.MainViewModel
-import co.studycode.runningapp.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
-import co.studycode.runningapp.utils.SortType
-import co.studycode.runningapp.utils.TrackingUtility
+import co.studycode.runbitapp.R
+import co.studycode.runbitapp.adapters.RunAdapter
+import co.studycode.runbitapp.ui.viewmodels.MainViewModel
+import co.studycode.runbitapp.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
+import co.studycode.runbitapp.utils.SortType
+import co.studycode.runbitapp.utils.TrackingUtility
 import com.google.android.gms.ads.*
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

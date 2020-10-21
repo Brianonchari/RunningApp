@@ -1,12 +1,12 @@
-package co.studycode.runningapp.ui.fragments
+package co.studycode.runbitapp.ui.fragments
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import co.studycode.runningapp.R
-import co.studycode.runningapp.utils.Constants.KEY_NAME
-import co.studycode.runningapp.utils.Constants.KEY_WEIGHT
+import co.studycode.runbitapp.R
+import co.studycode.runbitapp.utils.Constants.KEY_NAME
+import co.studycode.runbitapp.utils.Constants.KEY_WEIGHT
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar

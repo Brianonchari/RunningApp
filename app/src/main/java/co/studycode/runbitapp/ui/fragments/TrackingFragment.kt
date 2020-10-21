@@ -1,4 +1,4 @@
-package co.studycode.runningapp.ui.fragments
+package co.studycode.runbitapp.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,25 +7,28 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import co.studycode.runningapp.R
-import co.studycode.runningapp.db.Run
-import co.studycode.runningapp.service.Polyline
-import co.studycode.runningapp.service.TrackingService
-import co.studycode.runningapp.ui.viewmodels.MainViewModel
-import co.studycode.runningapp.utils.Constants.ACTION_PAUSE_SERVICE
-import co.studycode.runningapp.utils.Constants.ACTION_START_OR_RESUME_SERVICE
-import co.studycode.runningapp.utils.Constants.ACTION_STOP_SERVICE
-import co.studycode.runningapp.utils.Constants.CANCEL_TRACKING_DIALOG
-import co.studycode.runningapp.utils.Constants.MAP_ZOOM
-import co.studycode.runningapp.utils.Constants.POLYLINE_COLOR
-import co.studycode.runningapp.utils.Constants.POLYLINE_WIDTH
-import co.studycode.runningapp.utils.TrackingUtility
+import co.studycode.runbitapp.R
+import co.studycode.runbitapp.db.Run
+import co.studycode.runbitapp.service.Polyline
+import co.studycode.runbitapp.service.TrackingService
+import co.studycode.runbitapp.ui.viewmodels.MainViewModel
+import co.studycode.runbitapp.utils.Constants.ACTION_PAUSE_SERVICE
+import co.studycode.runbitapp.utils.Constants.ACTION_START_OR_RESUME_SERVICE
+import co.studycode.runbitapp.utils.Constants.ACTION_STOP_SERVICE
+import co.studycode.runbitapp.utils.Constants.CANCEL_TRACKING_DIALOG
+import co.studycode.runbitapp.utils.Constants.MAP_ZOOM
+import co.studycode.runbitapp.utils.Constants.POLYLINE_COLOR
+import co.studycode.runbitapp.utils.Constants.POLYLINE_WIDTH
+import co.studycode.runbitapp.utils.TrackingUtility
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_tracking.*
 import java.util.*
 import javax.inject.Inject
@@ -70,6 +73,11 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             addAllPolylines()
         }
         subscribeToObservers()
+
+        //Ads
+        MobileAds.initialize(requireContext())
+        val adRequest = AdRequest.Builder().build()
+        tvLetsGo.loadAd(adRequest)
     }
 
     private fun toggleRun() {

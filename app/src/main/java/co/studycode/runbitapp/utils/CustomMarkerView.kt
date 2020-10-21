@@ -1,7 +1,7 @@
-package co.studycode.runningapp.utils
+package co.studycode.runbitapp.utils
 
 import android.content.Context
-import co.studycode.runningapp.db.Run
+import co.studycode.runbitapp.db.Run
 import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight

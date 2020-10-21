@@ -1,4 +1,4 @@
-package co.studycode.runningapp.db
+package co.studycode.runbitapp.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

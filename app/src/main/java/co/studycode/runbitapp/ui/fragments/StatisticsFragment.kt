@@ -1,4 +1,4 @@
-package co.studycode.runningapp.ui.fragments
+package co.studycode.runbitapp.ui.fragments
 
 import android.graphics.Color
 import android.os.Bundle
@@ -8,10 +8,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import co.studycode.runningapp.R
-import co.studycode.runningapp.ui.viewmodels.StatisticsViewModel
-import co.studycode.runningapp.utils.CustomMarkerView
-import co.studycode.runningapp.utils.TrackingUtility
+import co.studycode.runbitapp.R
+import co.studycode.runbitapp.ui.viewmodels.StatisticsViewModel
+import co.studycode.runbitapp.utils.CustomMarkerView
+import co.studycode.runbitapp.utils.TrackingUtility
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
