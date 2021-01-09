@@ -1,6 +1,8 @@
 package co.studycode.runbitapp.ui.fragments
 
+import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -12,6 +14,7 @@ import co.studycode.runbitapp.db.Run
 import co.studycode.runbitapp.service.Polyline
 import co.studycode.runbitapp.service.TrackingService
 import co.studycode.runbitapp.ui.viewmodels.MainViewModel
+import co.studycode.runbitapp.utils.Constants
 import co.studycode.runbitapp.utils.Constants.ACTION_PAUSE_SERVICE
 import co.studycode.runbitapp.utils.Constants.ACTION_START_OR_RESUME_SERVICE
 import co.studycode.runbitapp.utils.Constants.ACTION_STOP_SERVICE
@@ -28,13 +31,14 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_tracking.*
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
 import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TrackingFragment : Fragment(R.layout.fragment_tracking) {
+class TrackingFragment : Fragment(R.layout.fragment_tracking) , EasyPermissions.PermissionCallbacks{
     private val viewModel: MainViewModel by viewModels()
     private var isTracking = false
     private var pathPoints = mutableListOf<Polyline>()
@@ -55,6 +59,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requestPermissions()
         mapView?.onCreate(savedInstanceState)
         btnToggleRun.setOnClickListener {
             toggleRun()
@@ -63,9 +68,10 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             zoomToSeeWholeTrack()
             endRunAndSave()
         }
-        if(savedInstanceState!=null){
+        if (savedInstanceState != null) {
             val cancelTrackingDialog = parentFragmentManager.findFragmentByTag(
-                CANCEL_TRACKING_DIALOG) as CancelTrackingDialog?
+                CANCEL_TRACKING_DIALOG
+            ) as CancelTrackingDialog?
             cancelTrackingDialog?.setListener { stopRun() }
         }
         mapView?.getMapAsync {
@@ -115,7 +121,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
                 stopRun()
             }
         }.show(parentFragmentManager, CANCEL_TRACKING_DIALOG)
-
     }
 
     private fun stopRun() {
@@ -124,18 +129,15 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         findNavController().navigate(R.id.action_trackingFragment_to_runFragment)
     }
 
-
     private fun subscribeToObservers() {
         TrackingService.isTracking.observe(viewLifecycleOwner, Observer {
             updateTracking(it)
         })
-
         TrackingService.pathPoints.observe(viewLifecycleOwner, Observer {
             pathPoints = it
             addLatestPolyline()
             moveCameraToUserpos()
         })
-
         TrackingService.timeRunInMillis.observe(viewLifecycleOwner, Observer {
             curTimeInMillis = it
             val formattedTime = TrackingUtility.getFormattedStopWatchTime(curTimeInMillis, true)
@@ -146,7 +148,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     private fun updateTracking(isTracking: Boolean) {
         this.isTracking = isTracking
         if (!isTracking && curTimeInMillis > 0L) {
-            btnToggleRun.text = "Start"
+            btnToggleRun.text = "Resume"
             btnFinishRun.visibility = View.VISIBLE
         } else if (isTracking) {
             btnToggleRun.text = "Stop"
@@ -190,13 +192,20 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             for (polyline in pathPoints) {
                 distanceInMeters += TrackingUtility.calculatePolyLineLength(polyline).toInt()
             }
-
             val avgSpeed =
                 kotlin.math.round((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10) / 10f
             val dateTimeStamp = Calendar.getInstance().timeInMillis
             val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
             val run =
-                Run(null, bmp, dateTimeStamp, avgSpeed, distanceInMeters, curTimeInMillis, caloriesBurned)
+                Run(
+                    null,
+                    bmp,
+                    dateTimeStamp,
+                    avgSpeed,
+                    distanceInMeters,
+                    curTimeInMillis,
+                    caloriesBurned
+                )
             viewModel.insertRun(run)
             Snackbar.make(
                 requireActivity().findViewById(R.id.rootView),
@@ -237,6 +246,50 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             it.action = action
             requireContext().startService(it)
         }
+
+    //Request Location Permission
+    private fun requestPermissions() {
+        if (TrackingUtility.hasLocationPermisions(requireContext())) {
+            return
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            EasyPermissions.requestPermissions(
+                this,
+                "This  app needs location permission in order to function properly and track your runs effectively.",
+                Constants.REQUEST_CODE_LOCATION_PERMISSION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        } else {
+            EasyPermissions.requestPermissions(
+                this,
+                "This  app needs location permission in order to function properly and track your runs effectively.",
+                Constants.REQUEST_CODE_LOCATION_PERMISSION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            )
+        }
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if(EasyPermissions.somePermissionPermanentlyDenied(this,perms)){
+            AppSettingsDialog.Builder(this).build().show()
+        }else{
+            requestPermissions()
+        }
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
 
     override fun onResume() {
         super.onResume()

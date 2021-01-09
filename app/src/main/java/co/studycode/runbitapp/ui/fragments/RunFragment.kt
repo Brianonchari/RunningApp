@@ -29,14 +29,14 @@ import timber.log.Timber
 
 
 @AndroidEntryPoint
-class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionCallbacks {
+class RunFragment : Fragment(R.layout.fragment_run){
     private val viewModel: MainViewModel by viewModels()
     private lateinit var runAdapter: RunAdapter
     private lateinit var mInterstitialAd: InterstitialAd
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requestPermissions()
+//        requestPermissions()
         setupRecyclerView()
         val adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(
             requireContext(),
@@ -137,51 +137,6 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         layoutManager = LinearLayoutManager(requireContext())
 
     }
-
-    //Request Permissions
-    private fun requestPermissions() {
-        if (TrackingUtility.hasLocationPermisions(requireContext())) {
-            return
-        }
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            EasyPermissions.requestPermissions(
-                this,
-                "This  app needs location permission in order to function properly and track your runs effectively.",
-                REQUEST_CODE_LOCATION_PERMISSION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-        } else {
-            EasyPermissions.requestPermissions(
-                this,
-                "This  app needs location permission in order to function properly and track your runs effectively.",
-                REQUEST_CODE_LOCATION_PERMISSION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-            )
-        }
-    }
-
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            AppSettingsDialog.Builder(this).build().show()
-        } else {
-            requestPermissions()
-        }
-    }
-
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
-    }
-
 
     private fun runAdEvents() {
         mInterstitialAd.adListener = object : AdListener() {
